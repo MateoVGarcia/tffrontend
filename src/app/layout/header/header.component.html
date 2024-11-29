@@ -1,18 +1,31 @@
+<header class="container-fluid shadow-sm ">
+    <div class="row">
+        <nav class="navbar bg-body-tertiary color">
+            <div class="container">
+                <a class="navbar-brand" [routerLink]="['/home']"
+                    routerLinkActive="router-link-active"><strong>TPF-HERRAMIENTAS INFORMATICAS</strong></a>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid row">
+        <div class="col">
 
-
-<header class="minav">
-    <a class="logo" [routerLink]="['/home']" routerLinkActive="router-link-active">Unju-HIA 2024</a>
-
-    <nav class="navbarme">
-        <a [routerLink]="['/home']" routerLinkActive="router-link-active">home</a>
-        <a (click)="crearUsuario()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle"
-                viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-            </svg>
-        </a>
-        <a [routerLink]="['/users']" routerLinkActive="router-link-active">Usuarios</a>
-    </nav>
+            <ul class="nav justify-content-center nav-underline">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/home']" routerLinkActive="router-link-active"  href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="crearPropietario()" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                          </svg>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/users']" routerLinkActive="router-link-active" >Usuarios</a>
+                </li>               
+            </ul>
+        </div>
+    </div>
 </header>

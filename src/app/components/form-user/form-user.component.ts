@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angu
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsersService } from '../../services/users.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -34,14 +35,12 @@ export class FormUserComponent {
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe(params => {
-      console.log(params);
-      if (params['id'] ==="" ) {
+      if (params['id'] == "") {
         this.accion = "add";
       } else {
         this.accion = "edit";
         this.getUserById(params['id']);
         this.id = params['id'];
-
       }
     })
     // Suscripcion a los cambios en el formGroup para tomar los valores actualizados
@@ -56,20 +55,24 @@ export class FormUserComponent {
     this.userService.createUsuario(this.userForm.value).subscribe({
       next: (response) => {
         console.log(response);
-          this.router.navigate(['/users']); // Redirige a la lista de usuarios
+        if (response.status === '0') { // Verifica el campo 'status' del objeto JSON
+          this.toastr.success('Usuario creado con exito');
+        }
       },
       error: (err) => {
         console.log(err);
+        this.toastr.error('No se ha podido crear el Usuario, intenta en un momento');
       }
     })
   }
 
   updateUser() {
-    this.id= this.activateRoute.snapshot.params['id'];
     this.userService.updateUsuario(this.id, this.userForm.value).subscribe({
       next: (response) => {
         console.log(response);
-          this.router.navigate(['/users']); // Redirige a la lista de usuarios
+        if (response.status === '0') { // Verifica el campo 'status' del objeto JSON
+          this.toastr.success('Usuario actualizado con exito');
+        }
       },
       error: (err) => {
         console.log(err);
@@ -81,12 +84,8 @@ export class FormUserComponent {
   getUserById(id: string) {
     this.userService.getUsuario(id).subscribe({
       next: (response) => {
-        console.log(response); 
-        this.userForm.patchValue({
-          name: response[0].name,
-          email: response[0].email
-        });
-        console.log(this.userForm.value);
+        // console.log(response); 
+        this.userForm.patchValue(response);
       },
       error: err => {
         console.log(err);
